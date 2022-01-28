@@ -1,29 +1,37 @@
 "use strict"
 
+class Bankrekening{
+    #saldo = 0;
 
-class HogerLager {
-    #teRadenGetal = Math.floor((Math.random() * 10) + 1)
-    #aantalPogingen = 0;
-    gok(getal) {
-        this.#aantalPogingen++;
-        if (getal < this.#teRadenGetal) {
-            return "Hoger";
+    stort(bedrag){
+        if(bedrag > 0){
+        this.#saldo += bedrag;
         }
-        if (getal > this.#teRadenGetal) {
-            return "Lager";
-        }
-        return "Gewonnen";
     }
-    getAantalPogingen() {
-        return this.#aantalPogingen;
+
+    haalAf(bedrag){
+        if(bedrag > 0 && bedrag <= this.#saldo){
+            this.#saldo -= bedrag;
+        } else {
+            console.log( "not good")
+        }
+    }
+
+    getSaldo(){
+        return this.#saldo;
     }
 }
 
-const hogerLager = new HogerLager();
-let getal = Number(prompt("Getal:"));
-let resultaat = hogerLager.gok(getal);
-while (resultaat !== "Gewonnen") {
-getal = Number(prompt(`${resultaat}, getal:`));
-resultaat = hogerLager.gok(getal);
-}
-alert(`${hogerLager.getAantalPogingen()} pogingen.`);
+
+const rekening = new Bankrekening();
+console.log(rekening.getSaldo());
+rekening.stort(10);
+console.log(rekening.getSaldo());
+rekening.stort(-2);
+console.log(rekening.getSaldo());
+rekening.haalAf(2);
+console.log(rekening.getSaldo());
+rekening.haalAf(-2);
+console.log(rekening.getSaldo());
+rekening.haalAf(20);
+console.log(rekening.getSaldo());
