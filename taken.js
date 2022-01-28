@@ -1,90 +1,81 @@
 "use strict";
-class Tegel {
-#prijs;
-constructor(prijs) {
-this.#prijs = prijs;
+
+class Artiest{
+    #naam;
+    #albums = []
+    constructor(naam){
+        this.#naam = naam;
+    }
+
+    voegAlbumToe(album){
+        this.#albums.push(album);
+    }
+
+    getNaam(){
+        return this.#naam;
+    }
+
+    getAlbums(){
+        return this.#albums;
+    }
 }
-getPrijs() {
-return this.#prijs;
+
+
+class Album {
+    #title;
+    #jaar;
+    #tracks = []
+    constructor(title,jaar){
+        this.#title = title;
+        this.#jaar = jaar;
+    }
+
+    voegTrackToe(track){
+        this.#tracks.push(track);
+    }
+
+    getTitel(){
+        return this.#title;
+    }
+
+    getJaar(){
+        return this.#jaar;
+    }
+
+    getTracks(){
+        return this.#tracks;
+    }
+
 }
+
+
+class Track {
+    #title ;
+    constructor(title){
+        this.#title = title;
+    }
+
+    getTitel(){
+        return this.#title;
+    }
 }
 
 
 
-class VierkanteTegel extends Tegel {
-#zijde;
-constructor(prijs, zijde) {
-super(prijs);
-this.#zijde = zijde;
-}
-getOppervlakte() {
-return Number((this.#zijde * this.#zijde).toFixed(2));
-}
-}
-class RechthoekigeTegel extends Tegel {
-#lengte;
-#breedte;
-constructor(prijs, lengte, breedte) {
-super(prijs);
-this.#lengte = lengte;
-this.#breedte = breedte;
-}
-getOppervlakte() {
-return Number((this.#lengte * this.#breedte).toFixed(2));
-}
-}
-class RondeTegel extends Tegel {
-#straal;
-constructor(prijs, straal) {
-super(prijs);
-this.#straal = straal;
-}
-getOppervlakte() {
-return Number((this.#straal * this.#straal * Math.PI).toFixed(2));
-}
-}
-class BestelRegel {
-#tegel;
-#aantal;
-constructor(tegel, aantal) {
-this.#tegel = tegel;
-this.#aantal = aantal;
-}
-getOppervlakte() {
-return Number((this.#tegel.getOppervlakte() * this.#aantal).toFixed(2));
-}
-getTeBetalen() {
-return Number((this.#tegel.getPrijs() * this.#aantal).toFixed(2));
-}
-}
 
-
-
-class Bestelling {
-#bestelRegels = [];
-voegBestelRegelToe(bestelRegel) {
-this.#bestelRegels.push(bestelRegel);
-}
-getOppervlakte() {
-let oppervlakte = 0;
-for (const bestelRegel of this.#bestelRegels) {
-oppervlakte += bestelRegel.getOppervlakte();
-}
-return Number(oppervlakte.toFixed(2));
-}
-getTeBetalen() {
-let teBetalen = 0;
-for (const bestelRegel of this.#bestelRegels) {
-teBetalen += bestelRegel.getTeBetalen();
-}
-return Number(teBetalen.toFixed(2));
+const album1 = new Album("Stoney & Meatloaf", 1971);
+album1.voegTrackToe(new Track("She Waits By The Window"));
+album1.voegTrackToe(new Track("It Takes All Kinds of People"));
+const album2 = new Album("Bat out of hell", 1977);
+album2.voegTrackToe(new Track("Bat out of Hell"));
+album2.voegTrackToe(new Track("Heaven can wait"));
+const artiest = new Artiest("Meat Loaf");
+artiest.voegAlbumToe(album1);
+artiest.voegAlbumToe(album2);
+console.log(artiest.getNaam());
+for (const album of artiest.getAlbums()) {
+console.log(album.getTitel(), album.getJaar());
+for (const track of album.getTracks()) {
+console.log(track.getTitel());
 }
 }
-
-
-
-const bestelling = new Bestelling();
-bestelling.voegBestelRegelToe(new BestelRegel(new VierkanteTegel(4, 3), 10));
-bestelling.voegBestelRegelToe(new BestelRegel(new RechthoekigeTegel(4,5,3),10));
-bestelling.voegBestelRegelToe(new BestelRegel(new RondeTegel(4, 3), 10));
-console.log(bestelling.getOppervlakte(), bestelling.getTeBetalen());
