@@ -1,46 +1,54 @@
 "use strict"
 
-class LijnStuk{
-    #eindpunt1;
-    #eindpunt2;
-    constructor(eindpunt1,eindpunt2){
-        this.#eindpunt1 = eindpunt1;
-        this.#eindpunt2 = eindpunt2;
+class Persoon {
+    #voornaam;
+    #familienaam;
+    constructor(voornaam,familienaam){
+        this.#voornaam = voornaam;
+        this.#familienaam = familienaam;
     }
 
-    isHorizontaal(){
-        console.log("is het Horizontaal ?")
-        return this.#eindpunt1.getY() === this.#eindpunt2.getY(); 
-        
-    }
-
-    isVerticaal(){
-        console.log("is het Verticaal ?")
-        return this.#eindpunt1.getX() === this.#eindpunt2.getX();
+    getNaam(){
+        return `${this.#voornaam} ${this.#familienaam}`
     }
 }
 
 
-class Punt{
-    #x;
-    #y;
-    constructor(x,y){
-        this.#x = x;
-        this.#y = y;
+class KlassiekGezin{
+    #papa;
+    #mama;
+    #kinderen = []
+    constructor(papa,mama){
+        this.#papa = papa;
+        this.#mama = mama;
     }
 
-    getX(){
-        return this.#x;
+    voegKindToe(persoon){
+        this.#kinderen.push(persoon);
     }
 
-    getY(){
-        return this.#y;
+    getPapa(){
+        return this.#papa;
+    }
 
+    getMama(){
+        return this.#mama;
+    }
+
+    getKinderen(){
+        return this.#kinderen;
     }
 }
 
+const gezin = new KlassiekGezin(new Persoon("jamal", "albatta"), new Persoon("mmm", "ddd"));
 
-const lijn1 = new LijnStuk (new Punt(8,6),new Punt(8,7)) 
+gezin.voegKindToe(new Persoon("ahmed","albatta"))
+gezin.voegKindToe(new Persoon("lala","albatta"))
 
-console.log(lijn1.isHorizontaal())
-console.log(lijn1.isVerticaal())
+
+console.log(gezin.getPapa().getNaam())
+console.log(gezin.getMama().getNaam())
+
+for(const kind of gezin.getKinderen()){
+    console.log(kind.getNaam())
+}
