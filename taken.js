@@ -1,54 +1,73 @@
 "use strict"
 
-class Persoon {
-    #voornaam;
-    #familienaam;
-    constructor(voornaam,familienaam){
-        this.#voornaam = voornaam;
-        this.#familienaam = familienaam;
+class Voertuig{   
+    #maximumAantalPersonen;
+    constructor(maximumAantalPersonen){
+        this.#maximumAantalPersonen = maximumAantalPersonen;
     }
 
-    getNaam(){
-        return `${this.#voornaam} ${this.#familienaam}`
+    info(){
+        return `personal aantal: ${this.#maximumAantalPersonen}`;
     }
 }
 
 
-class KlassiekGezin{
-    #papa;
-    #mama;
-    #kinderen = []
-    constructor(papa,mama){
-        this.#papa = papa;
-        this.#mama = mama;
+class LandVoertuig extends Voertuig{
+    #aantalwielen;
+    constructor(maximumAantalPersonen,aantalwielen){
+        super(maximumAantalPersonen);
+        this.#aantalwielen = aantalwielen;
     }
 
-    voegKindToe(persoon){
-        this.#kinderen.push(persoon);
+    info(){
+        return `${super.info()} wielen aantal: ${this.#aantalwielen}`
     }
 
-    getPapa(){
-        return this.#papa;
+}
+
+class Fiets extends LandVoertuig {
+    #aantalVersnellingen;
+    constructor(maximumAantalPersonen, aantalWielen, aantalVersnellingen) {
+        super(maximumAantalPersonen, aantalWielen);
+        this.#aantalVersnellingen = aantalVersnellingen;
+    }
+    info() {
+        return `${super.info()}, ${this.#aantalVersnellingen} versnellingen`;
+    }
     }
 
-    getMama(){
-        return this.#mama;
+
+
+class Vaartuig extends Voertuig{
+    #diepgang;
+    constructor(maximumAantalPersonen,diepgang){
+        super(maximumAantalPersonen);
+        this.#diepgang = diepgang;
     }
 
-    getKinderen(){
-        return this.#kinderen;
+    info(){
+        return `${super.info()} : ${this.#diepgang}`
+    }
+
+}
+
+
+
+
+
+class Duikboot extends Vaartuig{
+    #maximumDuikDiepte;
+    constructor(maximumAantalPersonen, diepgang, maximumDuikDiepte){
+        super(maximumAantalPersonen,diepgang);
+        this.#maximumDuikDiepte = maximumDuikDiepte;
+    }
+    info(){
+        return `${super.info()} ${this.#maximumDuikDiepte}`
     }
 }
 
-const gezin = new KlassiekGezin(new Persoon("jamal", "albatta"), new Persoon("mmm", "ddd"));
 
-gezin.voegKindToe(new Persoon("ahmed","albatta"))
-gezin.voegKindToe(new Persoon("lala","albatta"))
-
-
-console.log(gezin.getPapa().getNaam())
-console.log(gezin.getMama().getNaam())
-
-for(const kind of gezin.getKinderen()){
-    console.log(kind.getNaam())
-}
+const fiets = new Fiets(2, 2, 12);
+console.log(fiets.info());
+const duikboot = new Duikboot(45, 12, 9000);
+console.log(duikboot.info());
