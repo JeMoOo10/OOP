@@ -1,25 +1,24 @@
 "use strict"
 
-class Rechthoek{
-    #lengte;
-    #breedte;
-    constructor(lengte,breedte){
-        this.#lengte = lengte;
-        this.#breedte = breedte;
-    }
+class Vierkant {
+    #zijde;
+    constructor(zijde){
+        this.#zijde = zijde;
+    };
 
     getOmtrek(){
-        return (this.#lengte + this.#breedte) * 2;
-    }
+        return this.#zijde * 4;
+
+    };
 
     getOppervlakte(){
-        return this.#breedte * this.#lengte;
-    }
+        return this.#zijde * this.#zijde;
+    };
+};
 
-    
-}
+const vierkanten = [ new Vierkant(3), new Vierkant(5)];
 
-
-const rechthoek = new Rechthoek(6, 4);
-console.log(rechthoek.getOmtrek());
-console.log(rechthoek.getOppervlakte());
+for(const vierkant of vierkanten){
+    console.log(vierkant.getOmtrek());
+    console.log(vierkant.getOppervlakte());
+};

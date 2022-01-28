@@ -21,13 +21,12 @@ class GoedDoel {
 }
 
 
-const komOpTegenKanker = new GoedDoel("Kom op tegen kanker");
-komOpTegenKanker.stort(100); 
-komOpTegenKanker.stort(200);
-console.log(komOpTegenKanker.getOpbrengst()); 
-const cliniClowns = new GoedDoel("cliniClowns"); 
-cliniClowns.stort(500);
-console.log(cliniClowns.getOpbrengst());
-console.log(komOpTegenKanker.getNaam());
-console.log(cliniClowns.getNaam());
+const goedeDoelen = [ 
+    new GoedDoel("Kom op tegen kanker"), 
+    new GoedDoel("Cliniclowns") 
+    ];
 
+
+    for (const goedDoel of goedeDoelen) { 
+        console.log(goedDoel.getNaam()); 
+        };
