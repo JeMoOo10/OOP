@@ -17,3 +17,4 @@ console.log(komOpTegenKanker.getOpbrengst());
 const cliniClowns = new GoedDoel(); 
 cliniClowns.stort(500);
 console.log(cliniClowns.getOpbrengst());
+console.log(cliniClowns.#opbrengst);

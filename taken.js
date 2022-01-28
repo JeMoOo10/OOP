@@ -1,41 +1,29 @@
 "use strict"
 
-class DvdSpeler{
-    #snelheid = 0;
 
-    start(){
-        this.#snelheid = 1;
-        return this.#snelheid;
-    }
-
-    spoelDoor(){
-        if( this.#snelheid < 0){
-            this.#snelheid = 2;
-        } else {
-            this.#snelheid *= 2;
+class HogerLager {
+    #teRadenGetal = Math.floor((Math.random() * 10) + 1)
+    #aantalPogingen = 0;
+    gok(getal) {
+        this.#aantalPogingen++;
+        if (getal < this.#teRadenGetal) {
+            return "Hoger";
         }
-        return this.#snelheid;
-    }
-
-    spoelTerug(){
-        if(this.#snelheid > 0){
-            this.#snelheid = -2;
-        }else {
-            this.#snelheid *= 2;
+        if (getal > this.#teRadenGetal) {
+            return "Lager";
         }
-        return this.#snelheid;
+        return "Gewonnen";
+    }
+    getAantalPogingen() {
+        return this.#aantalPogingen;
     }
 }
 
-
-const snel = new DvdSpeler();
-
-console.log(snel.start());
-console.log(snel.spoelDoor());
-console.log(snel.spoelDoor());
-console.log(snel.spoelDoor());
-console.log(snel.spoelTerug());
-console.log(snel.spoelTerug());
-console.log(snel.spoelTerug());
-console.log(snel.start());
-
+const hogerLager = new HogerLager();
+let getal = Number(prompt("Getal:"));
+let resultaat = hogerLager.gok(getal);
+while (resultaat !== "Gewonnen") {
+getal = Number(prompt(`${resultaat}, getal:`));
+resultaat = hogerLager.gok(getal);
+}
+alert(`${hogerLager.getAantalPogingen()} pogingen.`);
