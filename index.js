@@ -52,14 +52,10 @@ class NonFoodArtikel extends Artikel {
 }
 
 
-const appel = new FoodArtikel("appel", 0.3, 6, 7);
-console.log(appel.getNaam());
-console.log(appel.getPrijsInclusiefBTW());
-console.log(appel.getVervalPeriode());
-const koelkast = new NonFoodArtikel("koelkast", 300, 21, 3);
-console.log(koelkast.getNaam());
-console.log(koelkast.getPrijsInclusiefBTW());
-console.log(koelkast.getGarantiePeriode());
-
-console.log(appel.getInfo()); 
-console.log(koelkast.getInfo());
+const artikels = [ 
+    new FoodArtikel("druif", 6, 6, 7), 
+    new NonFoodArtikel("papier", 10, 21, 1) 
+    ];
+    for (const artikel of artikels) { 
+    console.log(artikel.getInfo()); 
+    }
